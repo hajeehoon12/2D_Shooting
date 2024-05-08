@@ -380,6 +380,7 @@
 "Assets/Scripts/TopDownAimRotation.cs"
 "Assets/Scripts/TopDownController.cs"
 "Assets/Scripts/TopDownMovement.cs"
+"Assets/Scripts/TopDownShooting.cs"
 -langversion:9.0
 
 /deterministic
