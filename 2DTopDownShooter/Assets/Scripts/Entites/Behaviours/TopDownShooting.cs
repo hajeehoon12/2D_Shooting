@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class TopDownShooting : MonoBehaviour
 {
@@ -10,10 +11,12 @@ public class TopDownShooting : MonoBehaviour
 
     public GameObject TestPrefab;
 
+    private ObjectPool pool;
 
     private void Awake()
     {
         controller = GetComponent<TopDownController>();
+        pool = GameObject.FindObjectOfType<ObjectPool>();
     }
 
     private void Start()
@@ -28,14 +31,40 @@ public class TopDownShooting : MonoBehaviour
         aimDirection = direction;
     }
 
-    private void OnShoot()
+    private void OnShoot(AttackSO attackSO) // Shoot = Click fire
     {
-        CreateProjectile();
+        RangedAttackSO rangedAttackSO = attackSO as RangedAttackSO; // only need rangedattackSO
+        
+        if (rangedAttackSO == null) return; // try attackSO -> RangedAttackSO
+        
+        float projectilesAngleSpace = rangedAttackSO.multipleProjectilesAngle;
+        int numberOfProjectilesPerShot = rangedAttackSO.numberOfProjectilesPerShot;
+
+        float minAngle = -(numberOfProjectilesPerShot / 2f) * projectilesAngleSpace + 0.5f * rangedAttackSO.multipleProjectilesAngle; // Angle of projectile from weapon
+        
+        for (int i = 0; i < numberOfProjectilesPerShot; i++)
+        {
+            
+            float angle = minAngle * i * projectilesAngleSpace;
+            float randomSpread = Random.Range(-rangedAttackSO.spread, rangedAttackSO.spread);
+            angle += randomSpread;
+            CreateProjectile(rangedAttackSO, angle);
+        }
     }
 
-    private void CreateProjectile()
+    private void CreateProjectile(RangedAttackSO rangedAttackSO, float angle ) // create bullet
     {
-        // create bullet
-        Instantiate(TestPrefab, projectileSpawnPosition.position, Quaternion.identity);
+
+        GameObject obj = pool.SpawnFromPool(rangedAttackSO.bulletNameTag);
+        obj.transform.position = projectileSpawnPosition.position; // arrow prefab position initialize
+        ProjectileController attackController = obj.GetComponent<ProjectileController>();
+        attackController.InitializeAttack(RotateVector2(aimDirection, angle), rangedAttackSO); // initializing attack projectile
+
     }
+
+    private static Vector2 RotateVector2(Vector2 v, float angle)
+    {
+        return Quaternion.Euler(0f, 0f, angle) * v;
+    }
+
 }
