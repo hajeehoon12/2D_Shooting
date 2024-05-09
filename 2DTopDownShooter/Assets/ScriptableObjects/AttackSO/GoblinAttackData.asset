@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a8ac83aa904d3744bda5530571727a7, type: 3}
   m_Name: GoblinAttackData
   m_EditorClassIdentifier: 
-  size: 0
-  delay: 0
-  power: 0
-  speed: 0
+  size: 1
+  delay: 0.15
+  power: 1
+  speed: 5
   target:
     serializedVersion: 2
     m_Bits: 256

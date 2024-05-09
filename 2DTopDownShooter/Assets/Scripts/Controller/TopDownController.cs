@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TopDownController : MonoBehaviour
+public class TopDownController : MonoBehaviour // AttackDelay, Call Events, stats
 {
     public event Action<Vector2> OnMoveEvent; // Action 은 무조건 void 만 반환해야함 아니면 false 처리
     public event Action<Vector2> OnLookEvent;

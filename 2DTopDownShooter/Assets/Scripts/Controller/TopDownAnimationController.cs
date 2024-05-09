@@ -9,7 +9,9 @@ public class TopDownAnimationController : AnimationController
 
     private readonly float magnituteThreshold = 0.5f; // minimal length of moving of sensor
 
+    private HealthSystem healthSystem;
 
+    
 
     protected override void Awake()
     {
@@ -20,6 +22,13 @@ public class TopDownAnimationController : AnimationController
     {
         controller.OnAttackEvent += Attacking;
         controller.OnMoveEvent += Move;
+
+        if (healthSystem != null)
+        {
+            healthSystem.OnDamage += Hit;
+            healthSystem.OnInvincibilityEnd += InvincibilityEnd;
+        }
+
     }
 
     private void Move(Vector2 vector)
