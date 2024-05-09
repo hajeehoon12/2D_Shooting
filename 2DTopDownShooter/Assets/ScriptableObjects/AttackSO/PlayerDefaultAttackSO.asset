@@ -18,12 +18,12 @@ MonoBehaviour:
   speed: 10
   target:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   isOnKnockBack: 1
   knockBackPower: 5
   knockBackTime: 0.1
   bulletNameTag: Arrow
-  Duration: 5
+  duration: 0
   spread: 4
   numberOfProjectilesPerShot: 1
   multipleProjectilesAngle: 7
