@@ -7,7 +7,7 @@ public class TopDownRangeEnemyController : TopDownEnemyController
 {
     [SerializeField][Range(0f, 100f)] private float followRange = 15f;
     [SerializeField][Range(0f, 100f)] private float shootRange = 10f;
-
+     
     private int layerMaskTarget;
 
     protected override void Start()
