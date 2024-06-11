@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public Transform Player { get; private set; }
 
     public ObjectPool ObjectPool { get; private set; }
+    public ParticleSystem EffectParticle;
 
     // Start is called before the first frame update
     void Awake()
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
 
         Player = GameObject.FindGameObjectWithTag(playerTag).transform; // finding player object in start
         ObjectPool = GetComponent<ObjectPool>();
+        EffectParticle = GameObject.FindGameObjectWithTag("Particle").GetComponent<ParticleSystem>();
 
     }
 

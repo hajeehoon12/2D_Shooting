@@ -62,7 +62,18 @@ public class ProjectileController : MonoBehaviour
     private void DestroyProjectile(Vector3 position, bool createFx) // fx = effect
     {
         if (createFx)
-        { 
+        {
+            ParticleSystem particleSystem = GameManager.Instance.EffectParticle;
+
+            particleSystem.transform.position = position;
+            ParticleSystem.EmissionModule em = particleSystem.emission;
+            em.SetBurst(0, new ParticleSystem.Burst(0, Mathf.Ceil(attackData.size * 5)));
+            ParticleSystem.MainModule mm = particleSystem.main;
+            mm.startSpeedMultiplier = attackData.size * 10f;
+            particleSystem.Play();
+
+
+
             //Todo: particleSystem에 대해서 배우고, 무기 NameTag로 해당하는 Fx가져오기
         }
         gameObject.SetActive(false);
