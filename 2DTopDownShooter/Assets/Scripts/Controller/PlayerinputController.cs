@@ -3,12 +3,12 @@ using UnityEngine.InputSystem;
 
 public class PlayerinputController : TopDownController
 {
-    private Camera camera;
+    private Camera _camera;
 
     protected override void Awake()
     {
         base.Awake();
-        camera = Camera.main; // mainCamera 태그가 붙어있는 카메라를 가져온다.
+        _camera = Camera.main; // mainCamera 태그가 붙어있는 카메라를 가져온다.
     }
 
     public void OnMove(InputValue value)
@@ -21,7 +21,7 @@ public class PlayerinputController : TopDownController
     public void OnLook(InputValue value)
     {
         Vector2 newAim = value.Get<Vector2>();             // 매개변수 value로 마우스 포인터가 가르키는 위치 정보값 가져옴
-        Vector2 worldPos = camera.ScreenToWorldPoint(newAim); // screen상에서 찍은거기에 world 좌표로 변경
+        Vector2 worldPos = _camera.ScreenToWorldPoint(newAim); // screen상에서 찍은거기에 world 좌표로 변경
         newAim = (worldPos - (Vector2)transform.position).normalized; // world좌표로 변경된 값에서 현재 위치 값 빼주고 정규화해서 보는 방향을 정규벡터화시킴
 
         CallLookEvent(newAim);

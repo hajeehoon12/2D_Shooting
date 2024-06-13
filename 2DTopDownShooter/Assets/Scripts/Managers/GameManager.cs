@@ -5,11 +5,25 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+public enum UpgradeOption
+{ 
+    MaxHealth,
+    AttackPower,
+    Speed,
+    Knockback,
+    AttackDelay,
+    NumberofProjectiles,
+    COUNT // num of enum
+}
+
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     [SerializeField]private string playerTag;
+
+    [SerializeField] private CharacterStat defaultStat;
+    [SerializeField] private CharacterStat rangedStat;
 
     public Transform Player { get; private set; }
 
@@ -53,12 +67,23 @@ public class GameManager : MonoBehaviour
         playerHealthSystem.OnDamage += UpdateHealthUI;
         playerHealthSystem.OnHeal += UpdateHealthUI;
         playerHealthSystem.OnDeath += GameOver;
+        UpgradeStatInit();
 
         for (int i = 0; i < spawnPositionsRoot.childCount; i++)
         {
             spawnPositions.Add(spawnPositionsRoot.GetChild(i));
 
         }
+
+    }
+
+    private void UpgradeStatInit()
+    {
+        defaultStat.statsChangeType = StatsChangeType.Add;
+        defaultStat.attackSO = Instantiate(defaultStat.attackSO);
+
+        rangedStat.statsChangeType = StatsChangeType.Add;
+        rangedStat.attackSO = Instantiate(rangedStat.attackSO);
 
     }
 
@@ -113,6 +138,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("Enemy Spawn");
         int prefabIdx = Random.Range(0, enemyPrefabs.Count);
         GameObject enemy = Instantiate(enemyPrefabs[prefabIdx], spawnPositions[posIdx].position, Quaternion.identity);
+        enemy.GetComponent<CharacterStatsHandler>().AddStatModifier(defaultStat);
+        enemy.GetComponent<CharacterStatsHandler>().AddStatModifier(rangedStat);
         enemy.GetComponent<HealthSystem>().OnDeath += OnEnemyDeath;
         currentSpawnCount++;
     }
@@ -172,7 +199,36 @@ public class GameManager : MonoBehaviour
 
     private void RandomUpgrade()
     {
-        Debug.Log("Random Upgrade »£√‚");
+        UpgradeOption option = (UpgradeOption)Random.Range(0, (int)UpgradeOption.COUNT);
+        switch (option)
+        {
+            case UpgradeOption.MaxHealth:
+                defaultStat.maxHealth += 2;
+                break;
+
+            case UpgradeOption.Speed:
+                defaultStat.attackSO.power += 1;
+                break;
+
+            case UpgradeOption.Knockback:
+                defaultStat.attackSO.isOnKnockBack = true;
+                defaultStat.attackSO.knockBackPower += 1;
+                defaultStat.attackSO.knockBackTime = 0.1f;
+                break;
+
+            case UpgradeOption.AttackDelay:
+                defaultStat.attackSO.delay -= 0.05f;
+                break;
+
+            case UpgradeOption.NumberofProjectiles:
+                RangedAttackSO rangedAttackData = rangedStat.attackSO as RangedAttackSO;
+                if (rangedAttackData != null) rangedAttackData.numberOfProjectilesPerShot += 1;
+                break;
+
+            default:
+                break;
+
+        }
     }
 
     private void GameOver()

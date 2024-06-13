@@ -9,6 +9,9 @@ public abstract class PickUpItem : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
+        //if (collision.name == "Arrow(Clone)") return;
+
         OnPickedUp(collision.gameObject);
 
         if (pickupSound != null) SoundManager.PlayClip(pickupSound);

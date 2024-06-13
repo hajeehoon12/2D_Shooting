@@ -6,7 +6,7 @@ public class ProjectileController : MonoBehaviour
     [SerializeField] private LayerMask levelCollisionLayer;
     
 
-    private Rigidbody2D rigidbody;
+    private Rigidbody2D rigidBody;
     private SpriteRenderer spriteRenderer;
     private TrailRenderer trailRenderer;
 
@@ -19,7 +19,7 @@ public class ProjectileController : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        rigidbody = GetComponent<Rigidbody2D>();
+        rigidBody = GetComponent<Rigidbody2D>();
         trailRenderer = GetComponent<TrailRenderer>();
     
     
@@ -40,7 +40,7 @@ public class ProjectileController : MonoBehaviour
             DestroyProjectile(transform.position, false);
         }
 
-        rigidbody.velocity = direction * attackData.speed;
+        rigidBody.velocity = direction * attackData.speed;
     
     }
 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8173599617344423548}
   - component: {fileID: 3945590865522043608}
   - component: {fileID: 5960337569053656572}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: flask_big_blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}

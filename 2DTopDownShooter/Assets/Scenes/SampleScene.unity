@@ -2587,6 +2587,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTag: Player
+  defaultStat:
+    statsChangeType: 0
+    maxHealth: 0
+    speed: 0
+    attackSO: {fileID: 11400000, guid: a2f2a9b6cf813d441a6d406c69b66379, type: 2}
+  rangedStat:
+    statsChangeType: 0
+    maxHealth: 0
+    speed: 0
+    attackSO: {fileID: 11400000, guid: 5336ee5e1461c1040bce06c96da1745d, type: 2}
   EffectParticle: {fileID: 1481923126}
   waveText: {fileID: 203850674}
   hpGaugeSlider: {fileID: 1097146200}
