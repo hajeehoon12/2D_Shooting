@@ -377,6 +377,9 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.17f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.17f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
+"Assets/Pickups/PickedUpHeal.cs"
+"Assets/Pickups/PickUpItem.cs"
+"Assets/Pickups/PickUpStatModifiers.cs"
 "Assets/ScriptableObjects/Scripts/AttackSO.cs"
 "Assets/ScriptableObjects/Scripts/RangedAttackSO.cs"
 "Assets/Scripts/Controller/AnimationController.cs"
@@ -394,9 +397,11 @@
 "Assets/Scripts/Entites/Behaviours/TopDownMovement.cs"
 "Assets/Scripts/Entites/Behaviours/TopDownShooting.cs"
 "Assets/Scripts/Managers/GameManager.cs"
+"Assets/Scripts/Managers/SoundManager.cs"
 "Assets/Scripts/Stats/CharacterStat.cs"
 "Assets/Scripts/Stats/CharacterStatsHandler.cs"
 "Assets/Scripts/Util/ObjectPool.cs"
+"Assets/Scripts/Util/SoundSource.cs"
 -langversion:9.0
 
 /deterministic

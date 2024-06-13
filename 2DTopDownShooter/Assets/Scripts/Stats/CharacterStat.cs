@@ -11,7 +11,7 @@ public enum StatsChangeType // stat 스탯증가 적용 방식
 public class CharacterStat
 {
     public StatsChangeType statsChangeType;
-    [Range(1, 100)] public int maxHealth;
-    [Range(1f, 20f)] public float speed;
+    [Range(0, 100)] public int maxHealth;
+    [Range(0f, 20f)] public float speed;
     public AttackSO attackSO;
 }

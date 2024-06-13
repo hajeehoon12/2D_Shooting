@@ -6,6 +6,8 @@ using UnityEngine;
 public class HealthSystem : MonoBehaviour
 {
     [SerializeField] private float healthChangeDelay = 0.5f;
+    [SerializeField] private AudioClip damageClip;
+
 
     private CharacterStatsHandler statHandler;
     private float timeSinceLastChange = float.MaxValue; // time calculate from last hit
@@ -55,6 +57,9 @@ public class HealthSystem : MonoBehaviour
 
         timeSinceLastChange = 0f;
 
+       
+
+
         CurrentHealth += change; // health change value
         CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth); // restrict health range for 0<= health <= maxHealth
 
@@ -70,6 +75,9 @@ public class HealthSystem : MonoBehaviour
         else // When Damage to Player
         {
             OnDamage?.Invoke();
+            isAttacked = true;
+
+            if (damageClip) SoundManager.PlayClip(damageClip);
         }
 
         return true;
